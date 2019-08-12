@@ -24,16 +24,7 @@ connection.connect(function (err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId + "\n");
 
-    connection.query("SELECT * FROM products", function (err, res) {
-        if (err) throw err;
-        for (var i = 0; i < res.length; i++) {
-            console.log("Item #: " + res[i].item_id +
-                "\nProduct: " + res[i].product_name +
-                "\nPrice: $" + res[i].price + "\n")
-        }
-        display();
-    })
-
+    display();
 });
 
 function display() {
@@ -96,7 +87,7 @@ function display() {
                         } else {
                             connection.query("UPDATE products SET stock_quantity = stock_quantity -" + howmana + " WHERE item_id = " + ans1.firstQ);
                             console.log("Thank you for your Purchace!")
-                            connection.end();
+                            finalInventory();
                         
                         }
                     })
@@ -110,5 +101,18 @@ function display() {
         })
     
 
+}
+
+function finalInventory(){
+    connection.query("SELECT * FROM products", function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log("Item #: " + res[i].item_id +
+                "\nProduct: " + res[i].product_name +
+                "\nPrice: $" + res[i].price +
+                "\nQty: " + res[i].stock_quantity + "\n")
+        }
+    });
+    connection.end();
 }
 
