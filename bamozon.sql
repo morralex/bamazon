@@ -43,3 +43,4 @@ values ("Espresso Machine", "home & kitchen", 248.99, 35);
 insert into products (product_name, department_name, price, stock_quantity)
 values ("Turn Table", "cd & turntable", 145.95, 50);
 
+describe products

@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
     database: "bamazon"
 });
 
-  var inquirer = require('inquirer');
+var inquirer = require('inquirer');
 // --------------------------------Make the connection------------------------
 connection.connect(function (err) {
     if (err) throw err;
@@ -26,34 +26,87 @@ connection.connect(function (err) {
 
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
-        for (var i = 0; i < res.length; i++){
+        for (var i = 0; i < res.length; i++) {
             console.log("Item #: " + res[i].item_id +
                 "\nProduct: " + res[i].product_name +
-            "\nPrice: $" + res[i].price + "\n")
+                "\nPrice: $" + res[i].price + "\n")
         }
-    
+        display();
     })
 
-    connection.end();
-    // start();
 });
 
-// function start() {
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'firstQ',
-//             message: 'Please enter the "item_id" you would like to purchace.'
-//         }
-//     ])
-//       .then(function(reponse1) {
+function display() {
+    connection.query("SELECT * FROM products", function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log("Item #: " + res[i].item_id +
+                "\nProduct: " + res[i].product_name +
+                "\nPrice: $" + res[i].price + "\n")
+        }
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'firstQ',
+                message: 'Please enter the "Item #" you would like to purchace.'
+            },
+            {
+                type: 'input',
+                name: 'scndQ',
+                message: "How many would you like to purchace?"
+            }
+        ])
+        .then(function(ans1){
+            var selection = ans1.firstQ -1;
+            var howmana = ans1.scndQ;
 
-       
-//         }
-//       )
+            if (Number(res[selection].stock_quantity) < Number(howmana)) {
+                console.log ("Insufficient quantity!");
+                console.log("There are only " + res[selection].stock_quantity +  " " + res[selection].product_name + "'s left.")
+                connection.end();
+            } else {
+                inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'review',
+                        message: 'Would you like to review your purchace?'
+                    }
+                ])
+                .then(function(ans2){
+                    if (ans2.review === false) {
+                        console.log("Okay, have a good day.");
+                        connection.end();
+                    } else {
+                        console.log(
+                            "Item: " + res[selection].product_name +
+                            "\nQty: " + howmana +
+                            "\nTotal: " + " $" + (howmana * res[selection].price)
+                        )
+                    .inquirer.prompt([
+                        {
+                            type: 'confirm',
+                            name: 'checkout',
+                            message: 'Complete purchace?'
+                        }
+                    ])
+                    }
+                })
+            }
+               
+            })
+              
+            
+    
+        })
+    
+
+}
+
+// function firstQuestion() {
+
 // };
-  
-  
+
+
 
 
 // connection.end();
