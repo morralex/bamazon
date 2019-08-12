@@ -80,19 +80,29 @@ function display() {
                         console.log(
                             "Item: " + res[selection].product_name +
                             "\nQty: " + howmana +
-                            "\nTotal: " + " $" + (howmana * res[selection].price)
+                            "\nTotal: " + (howmana * res[selection].price)
                         )
-                    .inquirer.prompt([
+                    inquirer.prompt([
                         {
                             type: 'confirm',
                             name: 'checkout',
                             message: 'Complete purchace?'
                         }
                     ])
+                    .then(function(ans3){
+                        if (ans3 === false) {
+                            console.log("Okay, have a good day.");
+                            connection.end();
+                        } else {
+                            connection.query("UPDATE products SET stock_quantity = stock_quantity -" + howmana + " WHERE item_id = " + ans1.firstQ);
+                            console.log("Thank you for your Purchace!")
+                            connection.end();
+                        
+                        }
+                    })
                     }
                 })
             }
-               
             })
               
             
@@ -102,11 +112,3 @@ function display() {
 
 }
 
-// function firstQuestion() {
-
-// };
-
-
-
-
-// connection.end();
