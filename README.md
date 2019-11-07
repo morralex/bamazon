@@ -20,8 +20,7 @@ Follow these steps:
 
 ## GIF example of the app in use
 
-<iframe src="https://giphy.com/embed/kd9iY58sB4fj5lkmuJ" width="480" height="302" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/kd9iY58sB4fj5lkmuJ">via GIPHY</a></p>
-https://gph.is/g/aQN3L0R
+![AltText](https://media.giphy.com/media/kd9iY58sB4fj5lkmuJ/giphy.gif)
 
 ##Technoligies
 

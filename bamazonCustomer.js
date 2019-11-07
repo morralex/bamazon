@@ -51,7 +51,9 @@ function display() {
             var selection = ans1.firstQ -1;
             var howmana = ans1.scndQ;
 
-            if (Number(res[selection].stock_quantity) < Number(howmana)) {
+            if (ans1.firstQ === "show inventory"){
+                showInventory();
+            } else if (Number(res[selection].stock_quantity) < Number(howmana)) {
                 console.log ("Insufficient quantity!");
                 console.log("There are only " + res[selection].stock_quantity +  " " + res[selection].product_name + "'s left.")
                 connection.end();
@@ -87,7 +89,7 @@ function display() {
                         } else {
                             connection.query("UPDATE products SET stock_quantity = stock_quantity -" + howmana + " WHERE item_id = " + ans1.firstQ);
                             console.log("Thank you for your Purchace!")
-                            finalInventory();
+                            connection.end();
                         
                         }
                     })
@@ -103,7 +105,7 @@ function display() {
 
 }
 
-function finalInventory(){
+function showInventory(){
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
