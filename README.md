@@ -1,6 +1,5 @@
 # Bamazon
 
-Bamazon is a node.js application that uses mySQL to keep track of data in order to mimic a storefrom based website (like Amazon).
 
 ## Instructions
 
@@ -14,7 +13,7 @@ Follow these steps:
 
 3. Make sure you enter a valid item number.
 
-4. The app will add up your purchace and give you your total.
+4. The app will add up your purchase and give you your total.
 
 5. After you finish answering the questions, an updated list of items will show you the updated quantity.
 
