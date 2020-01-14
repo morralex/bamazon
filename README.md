@@ -21,7 +21,7 @@ Follow these steps:
 
 ![AltText](https://media.giphy.com/media/kd9iY58sB4fj5lkmuJ/giphy.gif)
 
-##Technoligies
+## Technologies
 
 * node.js
 * dotenv
