@@ -1,8 +1,8 @@
-# bamazon
+# Bamazon
 
 Bamazon is a node.js application that uses mySQL to keep track of data in order to mimic a storefrom based website (like Amazon).
 
-## instructions
+## Instructions
 
 In order for the app to work you must "npm i" install all the dependencies in the package-lock.json file provided.
 
